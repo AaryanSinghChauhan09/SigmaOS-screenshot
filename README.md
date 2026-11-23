@@ -1,4 +1,6 @@
-# Omasnap
+# SigmaOS Omasnap
+
+> Forked from omacom/omasnap (MIT). See `SIGMAOS_FORK.md`.
 
 See the [releases](https://github.com/omacom/omasnap/releases) for what changed in each version.
 
