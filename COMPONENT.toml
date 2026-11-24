@@ -1,6 +1,6 @@
 [component]
-name = "omasnap"
-id = "sigmaos-omasnap"
+name = "sigmaos-screenshot"
+id = "sigmaos-screenshot"
 kind = "component"
 license = "GPL-3.0-or-later"
 

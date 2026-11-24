@@ -1,7 +1,7 @@
-# Omasnap — Agent Guide
+# SigmaOS Screenshot — Agent Guide
 
-Omasnap is a super fast, native Wayland screenshot and annotation overlay,
-built for [Omarchy](https://omarchy.org) on Hyprland. It captures region,
+SigmaOS Screenshot is a super fast, native Wayland screenshot and annotation overlay,
+built for [SigmaOS](https://sigmaos.org) on Hyprland. It captures region,
 window, or full monitor (plus a scrolling-region mode that stitches a taller
 page into one image), then copies it and opens a floating compositor preview.
 The preview fades after 7 seconds of idle time unless kept with its pin button,
@@ -17,7 +17,7 @@ markers, text, OCR). Finished captures go to clipboard,
 Each of these has a longer writeup under `docs/` — read it before making a
 change that touches the principle, not just this summary.
 
-- **A specialized tool, not a general app.** Omasnap does one job — capture,
+- **A specialized tool, not a general app.** SigmaOS Screenshot does one job — capture,
   annotate, output — and does it fast. It is not a drawing program, not a
   file manager, not a general Wayland utility. A feature that isn't in
   service of "screenshot, mark it up, send it somewhere" doesn't belong
@@ -38,7 +38,7 @@ change that touches the principle, not just this summary.
   render time so nothing recoverable leaks into an export, while remaining
   a normal, undoable log entry until you export. See
   [docs/editing-model.md](docs/editing-model.md).
-- **Minimally configurable — pre-configured to be right, like Omarchy.**
+- **Minimally configurable — pre-configured to be right, like SigmaOS.**
   No settings UI, no wizards, no onboarding. The defaults are the product;
   a config key is a narrow escape hatch for a real divergent need (where to
   save, what to name it, preset colors), never a general mechanism. Adding
@@ -57,19 +57,19 @@ change that touches the principle, not just this summary.
   instead. No X11, no macOS/Windows. See
   [docs/platform-scope.md](docs/platform-scope.md).
 - **Lean, learned dependencies.** The dependency set is Qt6 + LayerShellQt +
-  wayland-client + libdeflate, plus shelling out to a few existing Omarchy tools
-  (`hyprctl`, `wl-copy`/`wl-paste`, `tesseract`, `omarchy-notification-send`)
+  wayland-client + libdeflate, plus shelling out to a few existing SigmaOS tools
+  (`hyprctl`, `wl-copy`/`wl-paste`, `tesseract`, `sigmaos-notification-send`)
   instead of linking their equivalents in-process. Know this list before
   proposing an addition to it. See [docs/dependencies.md](docs/dependencies.md).
 - **Single small binary.** Everything (capture, editor, pin mode, scroll
-  capture) runs from the one `omasnap` executable. Every new dependency or
+  capture) runs from the one `sigmaos-screenshot` executable. Every new dependency or
   vendored asset is weight every install carries.
 - **No backwards compatibility.** Break keybindings, CLI flags, file
   formats, or internals whenever it keeps the code simpler or the tool
   faster. Do not add compatibility shims, deprecation aliases, or migration
   code.
-- **Omarchy aesthetics.** `omarchy-notification-send` when available,
-  `OMASNAP_OCR_LANGS`/`OMARCHY_OCR_LANGS` fallback for OCR languages,
+- **SigmaOS aesthetics.** `sigmaos-notification-send` when available,
+  `SIGMAOS_SCREENSHOT_OCR_LANGS`/`SIGMAOS_OCR_LANGS` fallback for OCR languages,
   minimal vector-drawn icons (no icon-theme dependency), the bundled Neucha
   font. Chrome text uses `chromeFont()`/`chromeMonoFont()`
   (`src/overlay-chrome.cpp`), pinned in code, and `main()` installs
@@ -95,13 +95,13 @@ change that touches the principle, not just this summary.
 | `src/surface-capture.cpp` | In-process output/window capture via `ext-image-copy-capture` |
 | `src/cut.cpp/.hpp` | Cut-band tool: remove a strip and collapse the gap |
 | `src/recent-snaps.cpp/.hpp` | The recents shelf: shelving/reopening working documents |
-| `src/output-config.cpp/.hpp`, `src/palette-config.cpp/.hpp` | The optional `omasnap.conf` INI: output destination/filename, color presets |
+| `src/output-config.cpp/.hpp`, `src/palette-config.cpp/.hpp` | The optional `sigmaos-screenshot.conf` INI: output destination/filename, color presets |
 | `src/pin.cpp/.hpp`, `src/pin-file.cpp/.hpp`, `src/pin-layout.cpp/.hpp` | Floating pinned captures, their files, and compositor placement |
 | `src/pin-expiry.cpp/.hpp` | Preview countdown, interaction pauses, and fade |
 | `src/icons.cpp/.hpp` | Vector icon renderer for toolbar and pin controls |
 | `src/cli-path.cpp/.hpp` | Command-line image target resolution |
 | `src/eyedropper.cpp/.hpp` | Display-to-source color sampling |
-| `tests/*-smoke.cpp/.hpp` | `omasnap_tests`, headless Qt Test coverage: offscreen region clicks, async capture, single-instance handover, stitching fixtures |
+| `tests/*-smoke.cpp/.hpp` | `sigmaos-screenshot_tests`, headless Qt Test coverage: offscreen region clicks, async capture, single-instance handover, stitching fixtures |
 | `docs/` | Longer writeups of the principles above — read before changing behavior they cover |
 | `bin/build`, `bin/test` | Build, and test through ctest |
 | `CMakeLists.txt` | Build definition; reads the version from the release tag |
@@ -112,7 +112,7 @@ change that touches the principle, not just this summary.
 bin/test
 ```
 
-`bin/test` builds everything (`bin/build`) and runs it through ctest offscreen: `omasnap_tests`, the headless smoke suite (simulated region clicks, asynchronous capture, single-instance handover, stitching fixtures), and `omasnap_lint`, clang-tidy with the checks in `.clang-tidy`, which fails on any finding and runs whenever `run-clang-tidy` is installed. `bin/test -R omasnap_tests` runs only the smoke suite.
+`bin/test` builds everything (`bin/build`) and runs it through ctest offscreen: `sigmaos-screenshot_tests`, the headless smoke suite (simulated region clicks, asynchronous capture, single-instance handover, stitching fixtures), and `sigmaos-screenshot_lint`, clang-tidy with the checks in `.clang-tidy`, which fails on any finding and runs whenever `run-clang-tidy` is installed. `bin/test -R sigmaos-screenshot_tests` runs only the smoke suite.
 
 Smoke artifacts belong in `build/smoke-output/` (or `smoke-output/` beside a
 custom build's executable). Direct smoke runs use that default too; use
@@ -121,22 +121,22 @@ screenshots and other debugging artifacts out of the repository root.
 
 Always run `bin/test` after behavioral changes. CI (`.github/workflows/test.yml`) runs the same `bin/build` and `bin/test` on every push and PR.
 
-Dependencies (Arch) are the `depends`, `makedepends` and `checkdepends` in `pkgbuilds/omasnap/PKGBUILD` in omacom/omarchy-pkgs, which packages Omasnap and which CI installs from. See [docs/dependencies.md](docs/dependencies.md) before adding to that list.
+Dependencies (Arch) are the `depends`, `makedepends` and `checkdepends` in `pkgbuilds/sigmaos-screenshot/PKGBUILD` in AaryanSinghChauhan09/SigmaOS-pkg-core, which packages SigmaOS Screenshot and which CI installs from. See [docs/dependencies.md](docs/dependencies.md) before adding to that list.
 
 ## Release process
 
 The release tag is the version; nothing in the tree records it, so a release
 needs no commit. CMake reads it from `git describe` in a checkout, or from
-the `omasnap-<version>` directory of a GitHub release tarball.
+the `sigmaos-screenshot-<version>` directory of a GitHub release tarball.
 
 1. Build and run the smoke test (above) on `main`.
 2. `gh release create v<version> --target main --generate-notes`, then edit
    the notes into a short list of user-facing changes. The GitHub workflow
    attaches the build artifact to the release.
-3. omarchy-pkgs picks up the new GitHub release on its own: the hourly
-   Sync Upstream run watches `omacom/omasnap` releases, bumps
-   `pkgbuilds/omasnap/` (`pkgver` and checksum), and auto-merges once the
-   build passes. No manual omarchy-pkgs PR is needed.
+3. SigmaOS-pkg-core picks up the new GitHub release on its own: the hourly
+   Sync Upstream run watches `AaryanSinghChauhan09/SigmaOS-screenshot` releases, bumps
+   `pkgbuilds/sigmaos-screenshot/` (`pkgver` and checksum), and auto-merges once the
+   build passes. No manual SigmaOS-pkg-core PR is needed.
 
 See `README.md` for user-facing features, keybindings, and install
 instructions — keep it in sync when behavior changes.
