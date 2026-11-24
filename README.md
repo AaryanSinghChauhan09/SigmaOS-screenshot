@@ -660,3 +660,8 @@ the repository root while retaining its relevant commit history.
 The bundled Neucha, JetBrains Mono, and Inter Display fonts are distributed
 under the SIL Open Font License. Their provenance and hashes are recorded in
 `assets/FONTS.md`; their licenses are installed with the application.
+## Documentation
+
+Wiki documentation is available in the SigmaOS Wiki Staging repository:
+
+- [SigmaOS Wiki Staging](https://github.com/AaryanSinghChauhan09/sigmaos-wiki-staging#SigmaOS-screenshot) - Full Wiki documentation for all SigmaOS components
