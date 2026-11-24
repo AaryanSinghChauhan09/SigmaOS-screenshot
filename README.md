@@ -317,7 +317,7 @@ The output still completes immediately. Persistence errors are logged.
 ### Theme
 
 Omasnap reads the current SigmaOS palette from
-`~/.local/state/omarchy/current/theme/colors.toml` and uses the surface, control,
+`~/.local/state/sigmaos/current/theme/colors.toml` and uses the surface, control,
 tooltip, and border colors in `shell.toml` when present. Theme changes update
 open windows automatically; missing or invalid values use readable defaults.
 Chrome fonts stay pinned, and loading colors does not load a desktop Qt theme
