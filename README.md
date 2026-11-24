@@ -110,7 +110,7 @@ Runtime commands used by the application:
 - `hyprctl`
 - `wl-copy` and `wl-paste`
 - `tesseract`
-- `omarchy-notification-send` when available; saved captures include a thumbnail and
+- `sigmaos-notification-send` when available; saved captures include a thumbnail and
   reopen in Omasnap when clicked. Notification failure does not invalidate output.
 
 ## Install on SigmaOS
@@ -227,7 +227,7 @@ fullscreen captures output immediately. Quick output cannot be combined with `--
 Add `--notify` to announce every saved capture in a notification instead of a preview,
 like SigmaOS's saved screen recordings: the capture's thumbnail and size, with **Open**
 to view the saved PNG and **Edit** to annotate it, worded in SigmaOS's language through
-`omarchy-i18n`. SigmaOS passes it once its `omarchy-notification-send` takes `--action`
+`sigmaos-i18n`. SigmaOS passes it once its `sigmaos-notification-send` takes `--action`
 buttons. Pins and editors opened from that
 capture keep the option. Copy-only captures still show their preview, since there is
 no file to open.
@@ -295,7 +295,7 @@ passes 256 MiB, and the next offered format is tried; the image is refused if no
 
 File URLs are accepted too. A saved capture notification's "Click to edit" action launches
 `omasnap` on the finished screenshot, so it can be reopened and re-annotated. The action is
-handed to `omarchy-notification-send` as `--exec <omasnap> <file:// URL>`, separate argv
+handed to `sigmaos-notification-send` as `--exec <omasnap> <file:// URL>`, separate argv
 words after a trailing `--exec`, which the shell runs directly without shell parsing.
 
 ### Recent captures
@@ -636,7 +636,7 @@ The trace also breaks native capture into Wayland registry, buffer allocation, f
 and pixel handoff stages, and marks output readiness separately from subsequent
 recent-history persistence. It is completely silent by default.
 
-`.github/workflows/test.yml` runs `bin/build` and `bin/test` in an Arch Linux container on every push and pull request, with the dependencies read from omarchy-pkgs' PKGBUILD. A `v*` tag runs `.github/workflows/release.yml`, which attaches a staged Linux build to the GitHub release.
+`.github/workflows/test.yml` runs `bin/build` and `bin/test` in an Arch Linux container on every push and pull request, with the dependencies read from sigmaos-pkgs' PKGBUILD. A `v*` tag runs `.github/workflows/release.yml`, which attaches a staged Linux build to the GitHub release.
 
 ## Acknowledgements
 
