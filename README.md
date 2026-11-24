@@ -1,10 +1,10 @@
 # SigmaOS Omasnap
 
-> Forked from omacom/omasnap (MIT). See `SIGMAOS_FORK.md`.
+> Forked from SigmaOS/omasnap (MIT). See `SIGMAOS_FORK.md`.
 
-See the [releases](https://github.com/omacom/omasnap/releases) for what changed in each version.
+See the [releases](https://github.com/SigmaOS/omasnap/releases) for what changed in each version.
 
-A native Wayland screenshot and annotation overlay designed for Omarchy and Hyprland.
+A native Wayland screenshot and annotation overlay designed for SigmaOS and Hyprland.
 It captures the focused monitor before mapping an exclusive layer-shell surface, so the
 editor never appears in its own screenshot. The editor retains annotations as movable,
 resizable vector layers and preserves the monitor's native pixels on scaled displays.
@@ -91,12 +91,12 @@ preview keeps it on screen.
   hides the shelf, and it stays hidden until `Space` brings it back.
 - Correct native-pixel export on fractional or integer-scaled monitors.
 - Pins, editor controls, tooltips, and selection outlines follow the current
-  Omarchy theme, including live theme changes. Screenshot pixels, annotation
+  SigmaOS theme, including live theme changes. Screenshot pixels, annotation
   colors, and exported backdrops keep their chosen colors.
 
 ## Platform scope
 
-The supported target is **Wayland + Hyprland**, with Omarchy as the primary integration.
+The supported target is **Wayland + Hyprland**, with SigmaOS as the primary integration.
 The renderer, layer surface, clipboard, and monitor capture use Wayland protocols;
 monitor/window discovery currently calls `hyprctl`. The focused output is captured
 in-process through `ext-image-copy-capture` before the layer maps. Selection displays
@@ -113,11 +113,11 @@ Runtime commands used by the application:
 - `omarchy-notification-send` when available; saved captures include a thumbnail and
   reopen in Omasnap when clicked. Notification failure does not invalidate output.
 
-## Install on Omarchy
+## Install on SigmaOS
 
-Omarchy installs Omasnap as a package, built by `pkgbuilds/omasnap` in [omacom/omarchy-pkgs](https://github.com/omacom/omarchy-pkgs) from each release. Installing it does not modify Hyprland configuration.
+SigmaOS installs Omasnap as a package, built by `pkgbuilds/omasnap` in [AaryanSinghChauhan09/SigmaOS-pkgs](https://github.com/AaryanSinghChauhan09/SigmaOS-pkgs) from each release. Installing it does not modify Hyprland configuration.
 
-Pinned-window placement uses the Lua dispatcher on Omarchy’s Hyprland.
+Pinned-window placement uses the Lua dispatcher on SigmaOS’s Hyprland.
 
 ### Hyprland binding
 
@@ -157,7 +157,7 @@ hyprctl binds -j | jq -c \
   '[.[] | select(.description == "Screenshot") | {modmask,key,description}]'
 ```
 
-`omarchy plugin add` is intentionally not used. Omarchy plugins are Quickshell QML
+`omarchy plugin add` is intentionally not used. SigmaOS plugins are Quickshell QML
 extensions; they do not install native executables or system packages.
 
 ### Building by hand
@@ -225,9 +225,9 @@ fullscreen captures output immediately. Quick output cannot be combined with `--
 `--clipboard`, or `--pin`.
 
 Add `--notify` to announce every saved capture in a notification instead of a preview,
-like Omarchy's saved screen recordings: the capture's thumbnail and size, with **Open**
-to view the saved PNG and **Edit** to annotate it, worded in Omarchy's language through
-`omarchy-i18n`. Omarchy passes it once its `omarchy-notification-send` takes `--action`
+like SigmaOS's saved screen recordings: the capture's thumbnail and size, with **Open**
+to view the saved PNG and **Edit** to annotate it, worded in SigmaOS's language through
+`omarchy-i18n`. SigmaOS passes it once its `omarchy-notification-send` takes `--action`
 buttons. Pins and editors opened from that
 capture keep the option. Copy-only captures still show their preview, since there is
 no file to open.
@@ -316,7 +316,7 @@ The output still completes immediately. Persistence errors are logged.
 
 ### Theme
 
-Omasnap reads the current Omarchy palette from
+Omasnap reads the current SigmaOS palette from
 `~/.local/state/omarchy/current/theme/colors.toml` and uses the surface, control,
 tooltip, and border colors in `shell.toml` when present. Theme changes update
 open windows automatically; missing or invalid values use readable defaults.
@@ -396,7 +396,7 @@ OMASNAP_OCR_LANGS="tha+eng" omasnap
 ```
 
 Install the corresponding Tesseract language data before adding a language to
-`OMASNAP_OCR_LANGS`. When unset, omasnap falls back to Omarchy's
+`OMASNAP_OCR_LANGS`. When unset, omasnap falls back to SigmaOS's
 `OMARCHY_OCR_LANGS` (which commonly includes the user's script, e.g.
 `tha+eng`), then to `eng`.
 
@@ -653,7 +653,7 @@ affiliated with those projects.
 
 ## Project history
 
-This standalone repository was extracted with `git filter-repo` from the original Omarchy
+This standalone repository was extracted with `git filter-repo` from the original SigmaOS
 system-customization repository. The former `omasnap/` directory was promoted to
 the repository root while retaining its relevant commit history.
 
