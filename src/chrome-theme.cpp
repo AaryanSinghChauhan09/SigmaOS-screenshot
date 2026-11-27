@@ -258,7 +258,7 @@ QString ChromeTheme::fileDialogStyleSheet() const {
 
 QString chromeThemeDirectory() {
   return QDir::home().filePath(
-      QStringLiteral(".local/state/omarchy/current/theme"));
+      QStringLiteral(".local/state/sigmaos/current/theme"));
 }
 
 ChromeTheme loadChromeTheme(const QString &directory) {

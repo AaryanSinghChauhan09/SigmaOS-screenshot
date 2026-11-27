@@ -2755,12 +2755,12 @@ constexpr std::array<std::pair<const char *, const char *>, 4> kOmarchyText{{
     {"Edit", "capture.screenshotEdit"},
 }};
 
-/// Looks up the toast's wording with omarchy-i18n, all at once. English
+/// Looks up the toast's wording with sigmaos-i18n, all at once. English
 /// stays wherever a lookup fails or Omarchy has no entry and echoes the key.
 std::function<QString(const QString &)> omarchyText() {
   std::array<QProcess, kOmarchyText.size()> lookups;
   for (std::size_t index = 0; index < kOmarchyText.size(); ++index)
-    lookups[index].start(QStringLiteral("omarchy-i18n"),
+    lookups[index].start(QStringLiteral("sigmaos-i18n"),
                          {QString::fromLatin1(kOmarchyText[index].second)});
   QHash<QString, QString> words;
   for (std::size_t index = 0; index < kOmarchyText.size(); ++index) {
@@ -2800,7 +2800,7 @@ QStringList captureNotificationArguments(
     omasnap = QStringLiteral("omasnap");
   if (!toast) {
     // --exec consumes the rest of the command line as the click command's
-    // argv, which omarchy-notification-send runs without shell parsing. It
+    // argv, which sigmaos-notification-send runs without shell parsing. It
     // must come last and be given as separate words, never one quoted string.
     arguments << QStringLiteral("Click to edit") << QStringLiteral("--image")
               << imagePath << QStringLiteral("--exec") << omasnap
@@ -2836,7 +2836,7 @@ QStringList captureNotificationArguments(
 void sendCaptureNotification(
     const QString &message, const QString &imagePath, const QString &recentId,
     const std::function<bool(const QString &, const QStringList &)> &launcher) {
-  const QString program = QStringLiteral("omarchy-notification-send");
+  const QString program = QStringLiteral("sigmaos-notification-send");
   const bool toast = notifySavedCaptures() && !imagePath.isEmpty();
   const QStringList arguments = captureNotificationArguments(
       message, imagePath, recentId, toast,

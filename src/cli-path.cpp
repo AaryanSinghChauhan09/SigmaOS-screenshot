@@ -94,7 +94,7 @@ void configureCaptureCommandLine(QCommandLineParser &parser, bool beforeQt) {
       QStringLiteral("notify"),
       QStringLiteral("Announce saved captures in a notification with Open and "
                      "Edit buttons instead of a preview. Needs an "
-                     "omarchy-notification-send that takes --action."));
+                     "sigmaos-notification-send that takes --action."));
   parser.addOption(notifyOption);
   QCommandLineOption recentOption(QStringLiteral("recent"), QString(),
                                   QStringLiteral("id"));

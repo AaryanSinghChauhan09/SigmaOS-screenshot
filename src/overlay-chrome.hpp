@@ -26,7 +26,7 @@ class QPainter;
 [[nodiscard]] QFont chromeDefaultFont();
 /// Monospace counterpart for numeric readouts: fontconfig's `monospace`
 /// alias, which is what the fixed-font lookup resolved to under every theme
-/// (on Omarchy, the face `omarchy-font-set` chose).
+/// (on SigmaOS, the face `sigmaos-font-set` chose).
 [[nodiscard]] QFont chromeMonoFont(int pixelSize, bool bold = false);
 
 /// The badge naming what the overlay is doing, centered at the top, with the ×

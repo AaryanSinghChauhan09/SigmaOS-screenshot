@@ -470,10 +470,10 @@ bool removeEditorHandoff(const QString &path, const QString &token);
 [[nodiscard]] QString recognizeText(const QImage &image, QString &error);
 /** Whether saved captures are announced with Open and Edit buttons instead
  *  of a timed preview: set by --notify, which a caller passes once its
- *  omarchy-notification-send takes --action, and inherited by the pins and
+ *  sigmaos-notification-send takes --action, and inherited by the pins and
  *  editors that process starts. */
 [[nodiscard]] bool notifySavedCaptures();
-/** Builds the omarchy-notification-send argv. With actions, a saved image
+/** Builds the sigmaos-notification-send argv. With actions, a saved image
  *  becomes the toast's thumbnail, with its size as the description and Open
  *  and Edit buttons that each receive the image path through --with. Edit
  *  reopens recentId's layers when given, with the image as its fallback;
@@ -486,7 +486,7 @@ captureNotificationArguments(
     const QString &message, const QString &imagePath = {},
     const QString &recentId = {}, bool actions = false,
     const std::function<QString(const QString &)> &text = {});
-/** Starts omarchy-notification-send through the launcher when one is given,
+/** Starts sigmaos-notification-send through the launcher when one is given,
  *  with Open and Edit buttons under --notify, worded in Omarchy's language.
  *  Reading the saved image's size and looking up that wording start
  *  processes and touch the disk, so call it on a worker whenever imagePath
