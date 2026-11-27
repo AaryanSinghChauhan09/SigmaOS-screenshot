@@ -2757,7 +2757,7 @@ constexpr std::array<std::pair<const char *, const char *>, 4> kOmarchyText{{
 
 /// Looks up the toast's wording with sigmaos-i18n, all at once. English
 /// stays wherever a lookup fails or Omarchy has no entry and echoes the key.
-std::function<QString(const QString &)> omarchyText() {
+std::function<QString(const QString &)> sigmaosText() {
   std::array<QProcess, kOmarchyText.size()> lookups;
   for (std::size_t index = 0; index < kOmarchyText.size(); ++index)
     lookups[index].start(QStringLiteral("sigmaos-i18n"),
@@ -2840,7 +2840,7 @@ void sendCaptureNotification(
   const bool toast = notifySavedCaptures() && !imagePath.isEmpty();
   const QStringList arguments = captureNotificationArguments(
       message, imagePath, recentId, toast,
-      toast ? omarchyText() : std::function<QString(const QString &)>{});
+      toast ? sigmaosText() : std::function<QString(const QString &)>{});
   if (!(launcher ? launcher(program, arguments)
                  : QProcess::startDetached(program, arguments)))
     qWarning("Could not start %s", qPrintable(program));
