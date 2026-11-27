@@ -121,7 +121,7 @@ Pinned-window placement uses the Lua dispatcher on SigmaOS’s Hyprland.
 
 ### Hyprland binding
 
-Paste this into a Lua config loaded after `require("default.hypr.omarchy")`:
+Paste this into a Lua config loaded after `require("default.hypr.sigmaos")`:
 
 ```lua
 hl.unbind("PRINT")
@@ -157,7 +157,7 @@ hyprctl binds -j | jq -c \
   '[.[] | select(.description == "Screenshot") | {modmask,key,description}]'
 ```
 
-`omarchy plugin add` is intentionally not used. SigmaOS plugins are Quickshell QML
+`sigmaos plugin add` is intentionally not used. SigmaOS plugins are Quickshell QML
 extensions; they do not install native executables or system packages.
 
 ### Building by hand
@@ -397,7 +397,7 @@ OMASNAP_OCR_LANGS="tha+eng" omasnap
 
 Install the corresponding Tesseract language data before adding a language to
 `OMASNAP_OCR_LANGS`. When unset, omasnap falls back to SigmaOS's
-`OMARCHY_OCR_LANGS` (which commonly includes the user's script, e.g.
+`SIGMAOS_OCR_LANGS` (which commonly includes the user's script, e.g.
 `tha+eng`), then to `eng`.
 
 ## Controls
@@ -636,7 +636,7 @@ The trace also breaks native capture into Wayland registry, buffer allocation, f
 and pixel handoff stages, and marks output readiness separately from subsequent
 recent-history persistence. It is completely silent by default.
 
-`.github/workflows/test.yml` runs `bin/build` and `bin/test` in an Arch Linux container on every push and pull request, with the dependencies read from sigmaos-pkgs' PKGBUILD. A `v*` tag runs `.github/workflows/release.yml`, which attaches a staged Linux build to the GitHub release.
+`.github/workflows/test.yml` runs `bin/build` and `bin/test` in a standard Linux container on every push and pull request, with the dependencies read from sigmaos-pkgs' PKGBUILD. A `v*` tag runs `.github/workflows/release.yml`, which attaches a staged Linux build to the GitHub release.
 
 ## Acknowledgements
 
